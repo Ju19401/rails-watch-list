@@ -1,12 +1,22 @@
-<h1>Show List</h1>
-<%= @list.name %>
-<% @list.bookmarks.each do |bookmark| %>
+<h2>Le détail de la liste sélectionnée</h2>
+<h2><%= @list.name %></h2>
+  <% @list.bookmarks.each do |bookmark| %>
     <li>Commentaire : <%= bookmark.comment %></li>
     <li>Titre du film : <%= bookmark.movie.title %></li>
-    <li>aperçu du film : <%= bookmark.movie.overview %></li>
-    <li>url d'affiche du film : <%= bookmark.movie.poster_url %></li>
-   <%= link_to 'Delete',bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+    <li>Aperçu du film : <%= bookmark.movie.overview %></li>
+    <li>Affiche du film : <%= image_tag bookmark.movie.poster_url, width: 100  %></li>
   <% end %>
+  <br>
+  <br>
+  <%= cl_image_tag @list.photo.key, height: 300, width: 400, crop: :fill %>
 
-<%= link_to "Go Back", lists_path %>
-<%= link_to "Add Bookmark, ", new_list_bookmark_path(@list) %>
+<%= link_to "Retour à toutes les listes", lists_path %>
+<br>
+<br>
+<%= link_to "Ajouter un nouveau signet à cette liste", new_list_bookmark_path(@list) %>
+<br>
+<br>
+<%= link_to "Delete",
+  list_path(@list),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+%>

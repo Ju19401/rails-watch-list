@@ -1,7 +1,13 @@
-<h1>Movies List</h1>
+<h1>Save any kind of movies</h1>
 
+<ol>
   <% @lists.each do |list| %>
- <li><%= link_to list.name, list_path(list) %></li>
+    <li><%= link_to list.name, list_path(list) %></li>
+    <% if list.photo.attached? %>
+      <%= cl_image_tag list.photo.key, height: 300, width: 400, crop: :fill %>
+    <% end %>
   <% end %>
+</ol>
 
-  <%= link_to 'Create a new list', new_list_path %>
+
+<%= link_to "Créer une nouvelle liste de film",  new_list_path %>
