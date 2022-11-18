@@ -1,0 +1,12 @@
+<h1>Show List</h1>
+<%= @list.name %>
+<% @list.bookmarks.each do |bookmark| %>
+    <li>Commentaire : <%= bookmark.comment %></li>
+    <li>Titre du film : <%= bookmark.movie.title %></li>
+    <li>aperçu du film : <%= bookmark.movie.overview %></li>
+    <li>url d'affiche du film : <%= bookmark.movie.poster_url %></li>
+   <%= link_to 'Delete',bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+  <% end %>
+
+<%= link_to "Go Back", lists_path %>
+<%= link_to "Add Bookmark, ", new_list_bookmark_path(@list) %>
